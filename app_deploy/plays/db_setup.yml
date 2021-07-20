@@ -1,0 +1,47 @@
+- name: Add specified repository into sources list
+  apt_repository:
+    repo: deb http://archive.ubuntu.com/ubuntu bionic main
+    state: present
+
+- name: Install MySQL and PythonSQL
+  apt:
+    name: [ 'mysql-server', 'python3-pymysql', 'python-mysqldb' ]
+    state: latest
+    update_cache: true
+
+- name: Set the MySQL root password
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create new local my.cnf
+  template:
+    src: files/root_my.cnf.j2
+    dest: ~/.my.cnf
+    mode: 0600
+
+- name: Create database user with name 'giba' and password with all database privileges
+  mysql_user:
+    name: "{{ db_user }}"
+    password: "{{ mysql_giba_password }}"
+    priv: '*.*:ALL'
+    host: "{{ remote_host_ip }}"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+- name: Removes the MySQL test database
+  mysql_db:
+    name: test
+    state: absent
+    login_user: "{{ db_user }}"
+    login_password: "{{ mysql_root_password }}"
+  tags: mysql-configuration
+
+- name: Creation MySQL database
+  mysql_db:
+    name: "{{ mysql_db_name }}"
+    state: present
+    login_user: "{{ db_user }}"
+    login_password: "{{ mysql_root_password }}"

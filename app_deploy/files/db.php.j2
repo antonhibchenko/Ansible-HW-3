@@ -1,0 +1,11 @@
+<?php
+session_start();
+
+$conn = mysqli_connect(
+  '{{ remote_host_ip }}',
+  '{{ db_user }}',
+  '{{ mysql_giba_password }}',
+  '{{ mysql_db_name }}',
+) or die(mysqli_erro($mysqli));
+
+?>

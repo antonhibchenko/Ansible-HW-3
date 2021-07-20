@@ -1,0 +1,12 @@
+aws_console_password: "$&j454TG65UUUvtbt4%"
+mysql_root_user: "root"
+mysql_root_password: "password123"
+db_user: "giba"
+mysql_db_name: "php_mysql_crud"
+mysql_giba_password: "password123"
+app_user: "giba"
+http_host: "your_domain"
+http_conf: "your_domain.conf"
+http_port: "80"
+remote_host_ip: "%"
+disable_default: true
