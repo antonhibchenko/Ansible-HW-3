@@ -1,7 +1,7 @@
 - name: Create group CF
-    group:
-      name: CF
-      state: present
+  group:
+    name: CF
+    state: present
 
 - name: Create backup user for AWS Serial Console Connect
   user:
