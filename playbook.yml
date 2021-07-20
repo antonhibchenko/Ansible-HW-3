@@ -1,0 +1,6 @@
+---
+- name: Service install + add app
+  hosts: all
+  become: true
+  roles:
+    - application
