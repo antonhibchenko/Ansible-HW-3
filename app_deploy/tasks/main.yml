@@ -1,12 +1,12 @@
 ---
 # jobs for app env
 - name: setup APP instance
-  include: setup_app.yml
+  include: app_setup.yml
   tags:
     - apache-php-configuration
 
 - name: setup DB instance
-  include: setup_db.yml
+  include: db_setup.yml
   tags:
     - mysql-configuration
 
